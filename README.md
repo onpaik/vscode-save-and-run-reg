@@ -1,6 +1,8 @@
 ## Run saved file in Terminal
 
-Fork from [vscode-runonsave](https://github.com/emeraldwalk/vscode-runonsave)
+Fork from [vscode-save-and-run](https://github.com/wk-j/vscode-save-and-run)
+
+`add relativeFile path as regex tester`
 
 Simplify original extension by pass command into Terminal directly without spawn process, so we don't lose output colors.
 
@@ -13,7 +15,7 @@ Simplify original extension by pass command into Terminal directly without spawn
 
 ## Configuration
 
-Add "saveAndRun" configuration to user or workspace settings.
+Add `saveAndRunReg` configuration to user or workspace settings.
 
 - "commands" - Array of commands that will be run whenever a file is saved.
 - "match" - A regex for matching which files to run commands on
@@ -23,16 +25,16 @@ Add "saveAndRun" configuration to user or workspace settings.
 ## Sample Config
 
 ```json
-"saveAndRun": {
+"saveAndRunReg": {
   "commands": [
     {
-      "match": ".*",
+      "match": ".js$",
       "cmd": "echo 'I run for all files.'",
       "useShortcut": false,
       "silent": false
     },
     {
-      "match": "\\.txt$",
+      "match": ".*",
       "cmd": "echo 'I am a .txt file ${file}.'",
       "useShortcut": false,
       "silent": false
@@ -45,8 +47,8 @@ Add "saveAndRun" configuration to user or workspace settings.
 
 The following commands are exposed in the command palette
 
-- `Save and Run : Enable`
-- `Save and Run : Disable`
+- `Save and Run Reg: Enable`
+- `Save and Run Reg: Disable`
 
 ## Placeholder Tokens
 
@@ -68,4 +70,4 @@ Commands support placeholders similar to tasks.json.
 
 ## License
 
-[Apache](https://github.com/wk-j/vscode-save-and-run/blob/master/LICENSE)
+[Apache](https://github.com/onpaik/vscode-save-and-run-reg/blob/master/LICENSE)

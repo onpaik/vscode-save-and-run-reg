@@ -18,15 +18,15 @@ export function activate(context: vscode.ExtensionContext): void {
         disposeStatus.dispose()
     });
 
-    vscode.commands.registerCommand("extension.saveAndRun.enable", () => {
+    vscode.commands.registerCommand("extension.saveAndRunReg.enable", () => {
         extension.isEnabled = true
     });
 
-    vscode.commands.registerCommand("extension.saveAndRun.disable", () => {
+    vscode.commands.registerCommand("extension.saveAndRunReg.disable", () => {
         extension.isEnabled = false
     });
 
-    vscode.commands.registerCommand("extension.saveAndRun.execute", () => {
+    vscode.commands.registerCommand("extension.saveAndRunReg.execute", () => {
         let doc = vscode.window.activeTextEditor.document
         doc.save()
         extension.runCommands(doc, true)

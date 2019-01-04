@@ -24,7 +24,7 @@ export class RunOnSaveExtension {
 
     constructor(context: vscode.ExtensionContext) {
         this.context = context;
-        this.outputChannel = vscode.window.createOutputChannel("Save and Run");
+        this.outputChannel = vscode.window.createOutputChannel("Save and Run Reg");
     }
 
     private runInTerminal(command, name) {
@@ -50,13 +50,13 @@ export class RunOnSaveExtension {
     private loadConfig() {
         const uri = vscode.window.activeTextEditor.document.uri;
         let config = vscode.workspace.getConfiguration("", uri);
-        let key = "saveAndRun"
-        let saveAndRun = config.get<IConfig>(key);
-        return saveAndRun;
+        let key = "saveAndRunReg"
+        let saveAndRunReg = config.get<IConfig>(key);
+        return saveAndRunReg;
     }
 
     public showOutputMessage(message?: string): void {
-        message = message || `Save and Run ${this.isEnabled ? "enabled" : "disabled"}.`;
+        message = message || `Save and Run Reg ${this.isEnabled ? "enabled" : "disabled"}.`;
         this.outputChannel.appendLine(message);
     }
 
@@ -73,11 +73,16 @@ export class RunOnSaveExtension {
     }
 
     private findActiveCommands(config: IConfig, document: vscode.TextDocument, onlyShortcut: boolean) {
-        let match = (pattern: string) => pattern && pattern.length > 0 && new RegExp(pattern).test(document.fileName);
+        const rootFolder = this.getWorkspaceFolder();
+        const root = rootFolder.uri.path;
+        const relativeFile = "." + document.fileName.replace(root, "");
+
+        let match = (pattern: string) => pattern && pattern.length > 0 && new RegExp(pattern).test(relativeFile);
+
         let commandConfigs = config.commands
             .filter(cfg => {
-                let matchPattern = cfg.match || "";
-                let negatePattern = cfg.notMatch || "";
+                let matchPattern = cfg.match || '';
+                let negatePattern = cfg.notMatch || '';
                 // if no match pattern was provided, or if match pattern succeeds
                 let isMatch = matchPattern.length === 0 || match(matchPattern);
                 // negation has to be explicitly provided
