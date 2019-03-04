@@ -35,7 +35,7 @@ Add `saveAndRunReg` configuration to user or workspace settings.
     },
     {
       "match": ".*",
-      "cmd": "echo 'I am a .txt file ${file}.'",
+      "cmd": "echo 'I am a .txt file ${relativeFile}.'",
       "useShortcut": false,
       "silent": false
     }

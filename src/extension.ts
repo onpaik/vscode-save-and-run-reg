@@ -14,7 +14,7 @@ export function activate(context: vscode.ExtensionContext): void {
     }
 
     vscode.workspace.onDidChangeConfiguration(() => {
-        let disposeStatus = extension.showStatusMessage("Run On Save: Reloading config.")
+        let disposeStatus = extension.showStatusMessage("Run On Save Reg: Reloading config.")
         disposeStatus.dispose()
     });
 
